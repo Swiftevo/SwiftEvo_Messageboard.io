@@ -5,23 +5,10 @@ set -e
 NODE_ID="$1"
 [ -z "$NODE_ID" ] && { echo "Usage: $0 <node-id>"; exit 1; }
 
-# ─────────────────────── Swap Check ───────────────────────
-SWAP_EXISTS=$(swapon --show | wc -l)
-if [ "$SWAP_EXISTS" -eq 0 ]; then
-  echo "🔄 No swap found. Creating 8G swap..."
-  sudo fallocate -l 8G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=8192
-  sudo chmod 600 /swapfile
-  sudo mkswap /swapfile
-  sudo swapon /swapfile
-  echo "✅ Swap created and activated."
-else
-  echo "✅ Swap already exists."
-fi
-
 # ───── Step 1: 自动释放 apt 锁（如果存在）─────
 echo "🔍 Checking for apt lock..."
-APT_LOCK="/var/lib/dpkg/lock-frontend"
-LOCK_PID=$(lsof -t "$APT_LOCK" 2>/dev/null)
+# APT_LOCK="/var/lib/dpkg/lock-frontend"
+# LOCK_PID=$(lsof -t "$APT_LOCK" 2>/dev/null)
 
 if [ -n "$LOCK_PID" ]; then
   echo "⚠️  apt is locked by process $LOCK_PID. Killing..."
@@ -59,6 +46,19 @@ echo "✅ builded nexus-cli. Continuing..."
 
 # ───────────────── Run in tmux (auto detach) ───────────────
 cd target/release
+
+#─────────────────────── Swap Check ───────────────────────
+SWAP_EXISTS=$(swapon --show | wc -l)
+if [ "$SWAP_EXISTS" -eq 0 ]; then
+  echo "🔄 No swap found. Creating 8G swap..."
+  sudo fallocate -l 8G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=8192
+  sudo chmod 600 /swapfile
+  sudo mkswap /swapfile
+  sudo swapon /swapfile
+  echo "✅ Swap created and activated."
+else
+  echo "✅ Swap already exists."
+fi
 
 # 如果 tmux 会话已存在就 kill 掉它
 tmux has-session -t nexus 2>/dev/null && tmux kill-session -t nexus
