@@ -229,23 +229,23 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🌟Swift Evo - MessageBoard DApp</h1>
-            <p>冬季實習計劃 - 基于以太坊 Sepolia 测试网的留言板</p>
+            <h1>🌟 ETHPanda 冬季實習計劃推特互關留言版</h1>
+            <p>感謝由 ETHPanda & LXDAO 合辦的冬季實習計劃</p>
         </div>
 
         <div class="network-info">
-            <strong>📡 网络:</strong> Ethereum Sepolia Testnet
+            <strong>📡 網絡:</strong> Ethereum Sepolia Testnet
             <br>
-            <strong>⛽ Gas费用:</strong> 请确保钱包有足够的 SepoliaETH
+            <strong>⛽ Gas 費用:</strong> 請确保錢包有足够的 SepoliaETH
         </div>
 
         <!-- 钱包连接部分 -->
         <div class="wallet-section">
-            <div class="section-title">🔗 钱包连接</div>
-            <button id="connectBtn" onclick="connectWallet()">连接以太坊钱包</button>
+            <div class="section-title">🔗 錢包連接</div>
+            <button id="connectBtn" onclick="connectWallet()">連接以太坊錢包</button>
             <button id="detectBtn" onclick="detectWallets()"
-                style="background: linear-gradient(45deg, #4CAF50, #45a049);">检测可用钱包</button>
-            <div id="walletStatus" class="status info">请先连接以太坊兼容钱包 (MetaMask, Trust Wallet, Coinbase Wallet 等)</div>
+                style="background: linear-gradient(45deg, #4CAF50, #45a049);">檢測可用錢包</button>
+            <div id="walletStatus" class="status info">請先連接以太坊兼容錢包 (MetaMask, Trust Wallet, Coinbase Wallet 等)</div>
             <div id="walletList" style="margin-top: 10px;"></div>
         </div>
 
@@ -254,31 +254,32 @@
             <div class="section-title">📋 合约配置</div>
             <div class="input-group">
                 <label for="contractAddress">合约地址:</label>
+                <label for="Twitteraddress">察看各同學推特或輸入你的推特，請設置這份合約︰0x9B7d49F21a51AAbA50C74e1ee3E9903849128295
                 <input type="text" id="contractAddress" placeholder="输入你的合约地址 (0x...)">
             </div>
-            <button onclick="setContract()">设置合约</button>
-            <div id="contractStatus" class="status info">请输入合约地址</div>
+            <button onclick="setContract()">設置合约</button>
+            <div id="contractStatus" class="status info">請輪入合约地址</div>
         </div>
 
         <!-- 发送留言部分 -->
         <div class="message-section">
-            <div class="section-title">💬 发送留言</div>
+            <div class="section-title">💬 發送留言/推特帳號</div>
             <div class="input-group">
-                <label for="messageInput">留言内容:</label>
-                <textarea id="messageInput" rows="3" placeholder="输入你的留言..."></textarea>
+                <label for="messageInput">留言内容/推特帳號:</label>
+                <textarea id="messageInput" rows="3" placeholder="输入你的留言或推特帳號..."></textarea>
             </div>
-            <button onclick="leaveMessage()" id="sendBtn" disabled>发送留言</button>
+            <button onclick="leaveMessage()" id="sendBtn" disabled>发送留言/推特帳號</button>
             <div id="sendStatus"></div>
         </div>
 
         <!-- 查询留言部分 -->
         <div class="query-section">
-            <div class="section-title">🔍 查询留言</div>
+            <div class="section-title">🔍 查询留言/各人推特帳號</div>
             <div class="input-group">
                 <label for="queryAddress">查询地址:</label>
                 <input type="text" id="queryAddress" placeholder="输入地址 (0x...) 或留空查询自己的留言">
             </div>
-            <button onclick="queryMessages()" id="queryBtn" disabled>查询留言</button>
+            <button onclick="queryMessages()" id="queryBtn" disabled>查询留言/各同學推特帳號</button>
             <button onclick="queryMyMessages()">查询我的留言</button>
             <div id="queryStatus"></div>
             <div id="messagesList" class="messages-list" style="display: none;"></div>
